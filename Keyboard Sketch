@@ -1,0 +1,75 @@
+/*This is code to run a macro keyboar with a Arduino Leonardo! In our case it will be used for
+Fusion 360 shorcuts to make our CAD jobs far quicker! This is only a modfication from the code found here:
+https://www.makeuseof.com/tag/make-custom-shortcut-buttons-arduino/
+
+
+*/
+
+
+#include <Keyboard.h>
+
+int keys[] = {2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+void setup() {
+ // put your setup code here, to run once:
+ Keyboard.begin(); // setup keyboard
+ for (int i = 2; i < 11; ++i) {
+ // initilize pins
+ pinMode(i, INPUT);
+ }
+}
+
+void loop() {
+ // put your main code here, to run repeatedly:
+ for (int i = 2; i < 11; ++i) {
+ // check buttons
+ if(readButton(i)) {
+ doAction(i); 
+ }
+ }
+}
+
+boolean readButton(int pin) {
+ // check and debounce buttons
+ if (digitalRead(pin) == HIGH) {
+ delay(10);
+ if (digitalRead(pin) == HIGH) {
+ return true;
+ }
+ }
+ return false;
+}
+
+void doAction(int pin) {
+ // perform tasks
+ switch (pin) {
+ case 2:
+ Keyboard.press('y'); //Change symbol here for buttont o send this keyboard command 
+ delay(150);
+ Keyboard.releaseAll();
+ ;break;
+ case 3:
+ Keyboard.press('l');//Change symbol here for buttont o send this keyboard command
+ delay(150);
+ Keyboard.releaseAll();
+ ;break;
+ case 4:
+ Keyboard.press('c');//Change symbol here for buttont o send this keyboard command
+ delay(150);
+ Keyboard.releaseAll();
+ ;break;
+ case 5:
+ Keyboard.press('b');//Change symbol here for buttont o send this keyboard command
+ delay(150);
+ Keyboard.releaseAll();
+ ;break;
+ case 6:
+ Keyboard.press('e');//Change symbol here for buttont o send this keyboard command
+ delay(150);
+ Keyboard.releaseAll();
+; break;
+ case 7:
+ Keyboard.press('z');//Change symbol here for buttont o send this keyboard command
+ delay(150);
+ Keyboard.releaseAll();
+; break;}}
